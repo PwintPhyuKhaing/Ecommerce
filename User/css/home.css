@@ -1,0 +1,465 @@
+/* ================================
+   GLOBAL BASE (same as my_listings)
+   ================================ */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: url("/Ecommerce/assets/img/background.png") center center / cover fixed no-repeat;
+    color: #111827;
+    line-height: 1.5;
+    padding-top: 80px; /* space for fixed navbar if needed */
+}
+
+/* ================================
+   TOP NAV (for .topnav in home.php)
+   Styled to feel like my_listings top bar
+   ================================ */
+
+.topnav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #111827;
+    color: #f9fafb;
+    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.35);
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.7rem 1.5rem;
+}
+
+.topnav .logo img {
+    height: 48px;        /* actual layout height */
+    width: auto;
+    transform: scale(1.5);   /* visually larger */
+    transform-origin: left center;
+}
+
+
+
+.category {
+    margin-left: 0.5rem;
+}
+
+.category select {
+    padding: 0.4rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid #4b5563;
+    background: #1f2937;
+    color: #f9fafb;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+/* Search in the middle-ish */
+.search {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.search input {
+    width: 60%;
+    max-width: 400px;
+    padding: 0.4rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid #4b5563;
+    background: #111827;
+    color: #e5e7eb;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.search input::placeholder {
+    color: #9ca3af;
+}
+
+/* Buttons group on the right */
+.buttons {
+    flex: 0 0 auto;
+}
+
+.buttons a,
+.topnav .btn-logout {
+    color: #e5e7eb;
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 0.35rem 0.8rem;
+    border-radius: 999px;
+    margin-left: 0.4rem;
+    border: 1px solid transparent;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.buttons a:hover
+ {
+    background: #facc15;
+    color: #111827;
+}
+
+
+/* Hamburger icon (you already have the JS) */
+.icon {
+    display: none; /* hide on desktop, you can add responsive rules later */
+    color: #f9fafb;
+}
+
+/* ================================
+   PAGE LAYOUT (like my_listings)
+   ================================ */
+
+.content {
+    max-width: 1000px;
+    margin: 1.5rem auto 3rem;
+    padding: 0 1rem;
+}
+
+.content h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #111827;
+  margin-top: 20px;
+}
+
+/* ================================
+   ALERTS (reuse from dashboard)
+   ================================ */
+
+.alert {
+    border-radius: 0.75rem;
+    padding: 0.6rem 0.9rem;
+    margin-bottom: 0.9rem;
+    font-size: 0.9rem;
+    background: #ffffff;
+}
+
+.alert.success {
+    background: #ecfdf3;
+    border: 1px solid #22c55e;
+    color: #166534;
+}
+
+.alert.error {
+    background: #fef2f2;
+    border: 1px solid #f97373;
+    color: #7f1d1d;
+}
+
+/* ================================
+   POSTS GRID (same card style as my_listings)
+   ================================ */
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  padding: 20px 10px;
+}
+
+/* Card */
+.post-card {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  transition: transform .2s ease, box-shadow .2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* Image */
+.post-image img,
+.post-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  background: #f4f4f4;
+}
+
+.placeholder-img {
+  width: 100%;
+  height: 180px;
+  background: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #777;
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* Content */
+.post-body {
+  padding: 15px;
+  color: #374151;
+}
+
+.post-body h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #111827;
+  
+}
+
+.post-body .price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #d83a3a;
+  margin-bottom: 8px;
+}
+
+.post-body .meta {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+/* ================================
+   BUTTONS (Buy / Add to cart)
+   ================================ */
+
+.add-cart-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.btn {
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  border: none;
+}
+
+.btn.primary {
+  background: #0072ff;
+  color: #fff;
+}
+.btn.gg{
+  background: #0abc4b;
+  color: #fbfcfb;
+}
+.btn.p{
+  background: #b53ad7;
+  color: #fbfcfb;
+}
+
+.btn.primary:hover {
+  background: #0058cc;
+}
+
+.btn.secondary {
+  background: transparent;
+  border: 1px solid #d1d5db;
+  color: #111827;
+}
+
+.btn.secondary:hover {
+  background: #f3f4f6;
+}
+
+
+/* ================================
+   OWNER ACTION BUTTONS (edit/delete)
+   ================================ */
+
+.owner-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.owner-actions .btn {
+    padding: 8px 14px;
+    display: inline-block;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+/* Edit button */
+.owner-actions .btn.secondary {
+    background-color: #3b82f6;
+    color: #fff;
+}
+.owner-actions .btn.secondary:hover {
+    background-color: #2563eb;
+}
+
+/* Delete button */
+.owner-actions .btn.danger {
+    background-color: #dc2626;
+    color: #fff;
+}
+.owner-actions .btn.danger:hover {
+    background-color: #b91c1c;
+}
+
+.inline-form {
+    display: inline-block;
+}
+
+/* ================================
+   RESPONSIVE
+   ================================ */
+
+@media (max-width: 900px) {
+    .search input {
+        width: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+    .topnav {
+        flex-wrap: wrap;
+        padding: 0.6rem 1rem;
+    }
+
+    .search {
+        order: 10;
+        width: 100%;
+        margin-top: 0.4rem;
+    }
+
+    .search input {
+        width: 100%;
+        max-width: none;
+    }
+
+    .buttons {
+        order: 11;
+    }
+}
+.btn.ghost {
+  background: transparent;
+  color: #131313;
+  border: 1px solid #ccc;
+}
+
+.btn.ghost:hover {
+  background: #f3f3f3;
+}
+/* Logout button default */
+.btn-logout a {
+  
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: 0.2s ease;
+    display: inline-block;
+}
+
+/* Logout hover → RED */
+.btn-logout a:hover {
+    background: #e3342f;   /* red */
+    color: #fff;
+}
+
+    .detail-wrap{
+      max-width: 1000px;
+      margin: 30px auto;
+      background:#fff;
+      border-radius:14px;
+      padding:20px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:20px;
+      box-shadow:0 8px 20px rgba(0,0,0,.08);
+    }
+
+    /* ✅ Carousel styles */
+    .carousel {
+      position: relative;
+      width: 100%;
+      height: 380px;
+      overflow: hidden;
+      border-radius: 12px;
+      background:#f7f7f7;
+    }
+    .carousel-img {
+      width: 100%;
+      height: 380px;
+      object-fit: contain;
+      display: none;
+      background: #f7f7f7;
+    }
+    .carousel-img.active {
+      display: block;
+    }
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.4);
+      border: none;
+      color: white;
+      font-size: 22px;
+      padding: 10px 14px;
+      cursor: pointer;
+      border-radius: 50%;
+      z-index: 5;
+    }
+    .carousel-btn.prev { left: 10px; }
+    .carousel-btn.next { right: 10px; }
+    .carousel-btn:hover { background: rgba(0,0,0,0.6); }
+
+    .carousel-dots {
+      text-align: center;
+      margin-top: 10px;
+    }
+    .dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin: 0 4px;
+      background: #ccc;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .active-dot { background: #333; }
+
+    /* Right side info */
+    .detail-title{ font-size:24px; font-weight:700; margin:0 0 10px; }
+    .detail-price{ color:#e53935; font-size:20px; font-weight:700; margin-bottom:12px; }
+    .detail-meta p{ margin:6px 0; color:#444; }
+    .detail-desc{
+      margin-top:12px;
+      padding-top:12px;
+      border-top:1px solid #eee;
+      line-height:1.7;
+      color:#333;
+      white-space:pre-wrap;
+    }
+
+    @media(max-width:768px){
+      .detail-wrap{ grid-template-columns: 1fr; }
+      .carousel, .carousel-img { height: 300px; }
+    }
+ 

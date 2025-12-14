@@ -1,0 +1,215 @@
+/* ===== Global tokens ===== */
+:root {
+  --nav-h: 52px;
+}
+
+/* ===== Body & background ===== */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-top: var(--nav-h);                 /* space for fixed navbar */
+  background: url("img/Background-image.png") center center / cover fixed no-repeat;
+  color: #fff;
+}
+
+/* Home icon size only (brand/logo size is below) */
+.home img {
+  height: 28px;
+  width: auto;
+  vertical-align: middle;
+}
+
+/* ===== Page heading ===== */
+.content h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin: 40px 0 10px;
+  color: #fff;
+}
+
+/* ===== Navbar (fixed) ===== */
+.topnav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;            /* left | center | right */
+  background-color: #333;
+  padding: 8px 20px;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,.3);
+}
+
+/* General nav links */
+.topnav a {
+  color: #f2f2f2;
+  text-align: center;
+  padding: 10px 12px;                        /* slightly tighter */
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.topnav a:hover {
+
+  color: #fff;
+}
+
+/* Hide hamburger by default (desktop) */
+.topnav .icon { display: none; }
+
+/* Brand/logo size (readable but not huge) */
+.topnav .logo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: visible; /* allows the logo to scale outside navbar height */
+}
+
+.topnav .logo img {
+  height: 60px;
+  transform: scale(2) translateY(7px);
+  transform-origin: left center;
+}
+
+
+
+/* Category dropdown + Sell button */
+.category select {
+  margin-left: 10px;
+  background: #222;
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 5px;
+  padding: 6px 10px;
+}
+
+/* .sell is a link; give it button-like look */
+.buy {
+  display: inline-block;
+  margin-left: 10px;
+  background: #c71515;
+  color: #bd1414;
+  border-radius: 5px;
+  padding: 6px 12px !important;              /* override link padding */
+}
+
+/* Center search area */
+.search {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.search input {
+  width: 60%;
+  max-width: 460px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background: #222;
+  color: #fff;
+}
+
+/* Right side buttons (Signup + Back) */
+.right-buttons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-right: 40px
+  border:auto;
+/* move them left by adding right margin */
+  
+}
+
+.btn-login {
+  background: #09b915;
+  color: #000;
+  padding: 8px 14px !important;              /* ensure consistent size */
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .2s ease;
+}
+.btn-login:hover { background: #e99d34; }
+
+.btn-logout {
+  background: #f0ad4e;
+  color: #000;
+  padding: 8px 14px !important;              /* ensure consistent size */
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .2s ease;
+}
+.btn-login:hover { background: #e99d34; }
+
+
+.back img { height: 30px; width: 30px; }
+
+/* ===== Cards (unchanged, just tidied) ===== */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 30px;
+}
+.card {
+  background: #222;
+  border-radius: 10px;
+  padding: 20px;
+  width: 250px;
+  text-align: center;
+}
+.card img { width: 100%; border-radius: 10px; }
+.card button {
+  background-color: #04AA6D;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.card button:hover { background-color: #028a58; }
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .topnav { flex-wrap: wrap; justify-content: center; }
+  .search input { width: 90%; }
+  .right-buttons { width: 100%; justify-content: center; margin-top: 8px; }
+  .topnav .icon {
+    display: block;                           /* show hamburger on tablet/phone */
+    position: absolute; right: 16px; top: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Hide most items on small screens until hamburger toggles them */
+  .topnav a:not(:first-child),
+  .category,
+  .search,
+  .btn-login,
+  .back {
+    display: none;
+  }
+
+  .topnav a.icon { display: block; margin-left: auto; }
+
+  /* When .responsive is added by JS */
+  .topnav.responsive {
+    position: relative;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .topnav.responsive a.icon { position: absolute; right: 0; top: 0; }
+  .topnav.responsive a,
+  .topnav.responsive .category,
+  .topnav.responsive .search,
+  .topnav.responsive .btn-login,
+  .topnav.responsive .back {
+    display: block;
+    text-align: left;
+  }
+}

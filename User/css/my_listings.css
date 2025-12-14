@@ -1,0 +1,376 @@
+/* === GRID LAYOUT FOR MY LISTINGS === */
+.my-listings-grid,
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  padding: 20px 10px;
+}
+
+/* === CARD === */
+.post-card {
+  background: #c1bebe;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  transition: transform .2s ease, box-shadow .2s ease;
+  display: flex;
+  flex-direction: column;
+  box-shadow: #0058cc;
+  
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* === IMAGE === */
+.post-image img,
+.post-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  background: #f4f4f4;
+}
+
+.placeholder-img {
+  width: 100%;
+  height: 180px;
+  background: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #777;
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* === CONTENT === */
+.post-body {
+  padding: 15px;
+  color: #8c8a8a;
+}
+
+.post-body h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #000;
+}
+
+.post-body .price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #d83a3a;
+  margin-bottom: 10px;
+}
+
+/* === BUTTONS WRAPPER === */
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  
+}
+
+/* === BUTTONS === */
+.btn {
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn.primary {
+  background: #0072ff;
+  color: #fff;
+  border: none;
+}
+
+.btn.primary:hover {
+  background: #0058cc;
+}
+
+.btn.ghost {
+  background: transparent;
+  color: #131313;
+  border: 1px solid #ccc;
+   
+}
+
+.btn.ghost:hover {
+  background: #f3f3f3;
+}
+
+/* === DELETE BUTTON === */
+.btn-danger {
+  background: #e34a4a;
+  color: white;
+  border: none;
+}
+
+.btn-danger:hover {
+  background: #c93b3b;
+}
+
+/* === TABLE CLEANUP (if using table mode) === */
+.table-wrapper {
+  margin-top: 20px;
+}
+
+.table td a.btn-table {
+  padding: 6px 10px;
+  background: #0072ff;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.table td a.btn-table.btn-danger {
+  background: #e34a4a;
+}
+
+/* RESET ------------------------------------------------------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: url("/Ecommerce/assets/img/background.png") center center / cover fixed no-repeat;
+    color: #111827;
+    line-height: 1.5;
+}
+
+/* NAVBAR (same as user-dashboard.css) ------------------------- */
+
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.9rem 1.5rem;
+    background: #111827;
+    color: #f9fafb;
+}
+
+.top-nav .logo {
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    font-size: 1.1rem;
+}
+
+.top-nav nav a {
+    color: #e5e7eb;
+    margin-left: 1rem;
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 0.35rem 0.6rem;
+    border-radius: 999px;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.top-nav nav a:hover,
+.top-nav nav a.active {
+    background: #facc15;
+    color: #111827;
+}
+
+.btn-ghost {
+    border: 1px solid #9ca3af;
+    padding: 0.35rem 0.9rem;
+}
+
+.btn-ghost.small {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.6rem;
+}
+
+/* PAGE LAYOUT (same as user-dashboard.css) -------------------- */
+
+.page {
+    max-width: 1000px;
+    margin: 1.5rem auto 3rem;
+    padding: 0 1rem;
+}
+
+.page h1 {
+    font-size: 1.7rem;
+    margin-bottom: 1rem;
+}
+
+/* === GRID LAYOUT FOR MY LISTINGS ============================= */
+
+.my-listings-grid,
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  padding: 20px 10px;
+}
+
+/* === CARD ==================================================== */
+.post-card {
+  background: #c1bebe;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  transition: transform .2s ease, box-shadow .2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* === IMAGE =================================================== */
+.post-image img,
+.post-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  background: #f4f4f4;
+}
+
+.placeholder-img {
+  width: 100%;
+  height: 180px;
+  background: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #777;
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* === CONTENT ================================================= */
+.post-body {
+  padding: 15px;
+  color: #8c8a8a;
+}
+
+.post-body h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #000;
+}
+
+.post-body .price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #d83a3a;
+  margin-bottom: 10px;
+}
+
+/* === BUTTONS WRAPPER ========================================= */
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* === BUTTONS ================================================= */
+.btn {
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn.primary {
+  background: #0072ff;
+  color: #fff;
+  border: none;
+}
+
+.btn.primary:hover {
+  background: #0058cc;
+}
+
+.btn.ghost {
+  background: transparent;
+  color: #131313;
+  border: 1px solid #ccc;
+}
+
+.btn.ghost:hover {
+  background: #f3f3f3;
+}
+
+/* === DELETE BUTTON =========================================== */
+.btn-danger {
+  background: #e34a4a;
+  color: white;
+  border: none;
+}
+
+.btn-danger:hover {
+  background: #c93b3b;
+}
+
+/* === TABLE CLEANUP (if using table mode) ===================== */
+.table-wrapper {
+  margin-top: 20px;
+}
+
+.table td a.btn-table {
+  padding: 6px 10px;
+  background: #0072ff;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.table td a.btn-table.btn-danger {
+  background: #e34a4a;
+}
+
+/* RESPONSIVE (optional, copy from user-dashboard if needed) ---- */
+@media (max-width: 800px) {
+    .page {
+        padding: 0 .75rem;
+    }
+}
+/* SOLD OUT badge */
+.sold-badge{
+  display:inline-block;
+  margin-top:6px;
+  padding:4px 8px;
+  background:#dc3545;
+  color:#fff;
+  font-size:12px;
+  font-weight:700;
+  border-radius:6px;
+  letter-spacing:0.4px;
+}
+
+/* Disabled action button */
+.btn.disabled{
+  opacity:0.6;
+  cursor:not-allowed;
+  pointer-events:none;
+}
+
+
+
+
+
+
