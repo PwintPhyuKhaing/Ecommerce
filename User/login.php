@@ -1,13 +1,10 @@
 <?php
-// Use central config: starts session + connects to DB
+
 require_once __DIR__ . '/../admin/config.php';
 
-// Initialize error variable so it's always defined
+
 $error = "";
 
-/**
- * Handle POST
- */
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = trim($_POST["username"] ?? '');
     $password = $_POST["password"] ?? '';
@@ -24,7 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         if (!$stmt) {
             $error = "Database error: " . $conn->error;
-
         } else {
             $stmt->bind_param("s", $username);
             $stmt->execute();
@@ -45,7 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $_SESSION["email"]    = $email;
                     $_SESSION["role"]     = $role;
 
-                    // ✅ Redirect after login (ADMIN vs USER)
                     if ($role === 'admin') {
                         header("Location: /Ecommerce/admin/admin_home.php");
                         exit;
@@ -53,11 +48,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         header("Location: /Ecommerce/User/home.php");
                         exit;
                     }
-
                 } else {
                     $error = "Invalid password.";
                 }
-
             } else {
                 $error = "No account found with that username.";
             }
@@ -71,68 +64,71 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 ?>
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>Login</title>
 
-  <link rel="stylesheet" href="/Ecommerce/User/css/login.css">
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="/Ecommerce/User/css/login.css">
 </head>
+
 <body>
 
-<div class="auth-wrapper">
-    <div class="auth-card">
+    <div class="auth-wrapper">
+        <div class="auth-card">
 
-        <h2>Welcome Back</h2>
-        <p class="subtitle">Login to your account</p>
+            <h2>Welcome Back</h2>
+            <p class="subtitle">Login to your account</p>
 
-        <?php if (!empty($error)): ?>
-            <div class="alert error"><?php echo htmlspecialchars($error); ?></div>
-        <?php endif; ?>
+            <?php if (!empty($error)): ?>
+                <div class="alert error"><?php echo htmlspecialchars($error); ?></div>
+            <?php endif; ?>
 
-        <form method="POST" action="">
-            
-            <div class="input-group">
-                <label>Username</label>
-                <input type="text" name="username" placeholder="Enter username" required>
-            </div>
+            <form method="POST" action="">
 
-            <div class="input-group">
-                <label>Password</label>
-                <div class="password-wrapper">
-                    <input type="password" id="password" name="password" placeholder="Enter password" required>
-                    <button type="button" id="togglePassword" class="toggle-password">👁</button>
+                <div class="input-group">
+                    <label>Username</label>
+                    <input type="text" name="username" placeholder="Enter username" required>
                 </div>
-            </div>
 
-            <div class="actions">
-                <button type="submit" class="btn primary">Login</button>
-                <a href="/Ecommerce/User/index.php" class="btn secondary">Cancel</a>
-            </div>
-        </form>
+                <div class="input-group">
+                    <label>Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="password" name="password" placeholder="Enter password" required>
+                        <button type="button" id="togglePassword" class="toggle-password">👁</button>
+                    </div>
+                </div>
 
-        <p style="margin-top:10px;">
-            <a href="forgot_password.php" class="link">Forgot password?</a>
-        </p>
+                <div class="actions">
+                    <button type="submit" class="btn primary">Login</button>
+                    <a href="/Ecommerce/User/index.php" class="btn secondary">Cancel</a>
+                </div>
+            </form>
 
-        <p class="footnote">
-            Don't have an account?
-            <a href="register.php" class="link">Signup</a>
-        </p>
+            <p style="margin-top:10px;">
+                <a href="forgot_password.php" class="link">Forgot password?</a>
+            </p>
 
+            <p class="footnote">
+                Don't have an account?
+                <a href="register.php" class="link">Signup</a>
+            </p>
+
+        </div>
     </div>
-</div>
 
-<script>
-    // Show / Hide password
-    const password = document.getElementById("password");
-    const toggle = document.getElementById("togglePassword");
+    <script>
+        // Show / Hide password
+        const password = document.getElementById("password");
+        const toggle = document.getElementById("togglePassword");
 
-    toggle.addEventListener("click", () => {
-        const type = password.type === "password" ? "text" : "password";
-        password.type = type;
-        toggle.textContent = type === "text" ? "🙈" : "👁";
-    });
-</script>
+        toggle.addEventListener("click", () => {
+            const type = password.type === "password" ? "text" : "password";
+            password.type = type;
+            toggle.textContent = type === "text" ? "🙈" : "👁";
+        });
+    </script>
 
 </body>
+
 </html>

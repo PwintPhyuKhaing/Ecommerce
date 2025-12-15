@@ -1,50 +1,30 @@
 <?php
-/**
- * db_connect.php — simple buy & sell schema (NO auctions)
- * DB: ecommerce
- *
- * Tables created:
- *  - users
- *  - categories
- *  - items
- *  - cart_items
- *  - orders
- *  - order_items
- *  - vouchers
- *  - voucher_redemptions
- */
 
-//////////////////////////
-// 0) Configuration
-//////////////////////////
-$host     = '127.0.0.1';
+$host     = 'localhost';
 $username = 'root';
 $password = '';
-$dbname   = 'ecommerce';  // <- DB name
-$port     = 3307;         // change if your MySQL runs on a different port
+$dbname   = 'ecommerce';
+$port     = 3308;
 
-//////////////////////////
-// 1) Connect (no DB yet)
-//////////////////////////
+
 $conn = new mysqli($host, $username, $password, '', $port);
 if ($conn->connect_errno) {
     die("Fail to connect MySQL: " . $conn->connect_error);
 }
 $conn->set_charset('utf8mb4');
 
-// Helper: run query or print error
-function run_or_die(mysqli $conn, string $sql, string $label = ''): bool {
+
+function run_or_die(mysqli $conn, string $sql, string $label = ''): bool
+{
     if ($conn->query($sql) === false) {
-        echo "\n\n❌ SQL Error while {$label}:\n{$sql}\nMySQL says: {$conn->error}\n";
+        echo "\n\n SQL Error while {$label}:\n{$sql}\nMySQL says: {$conn->error}\n";
         return false;
     }
     return true;
 }
 
-//////////////////////////
-// 2) Create database
-//////////////////////////
-function create_database(mysqli $conn, string $dbname): bool {
+function create_database(mysqli $conn, string $dbname): bool
+{
     $sqls = [
         "CREATE DATABASE IF NOT EXISTS `{$dbname}` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci",
         "ALTER DATABASE `{$dbname}` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci"
@@ -58,34 +38,35 @@ if (!create_database($conn, $dbname)) {
     die("Could not create/select database.");
 }
 
-//////////////////////////
-// 3) Select DB
-//////////////////////////
+
 if (!$conn->select_db($dbname)) {
-    die("❌ Could not select DB `{$dbname}`: " . $conn->error);
+    die(" Could not select DB `{$dbname}`: " . $conn->error);
 }
 $conn->query("SET sql_mode=''");
 $conn->set_charset('utf8mb4');
 
-//////////////////////////
-// 4) Create core tables
-//////////////////////////
-function ensure_schema(mysqli $conn): bool {
+
+function ensure_schema(mysqli $conn): bool
+{
     // USERS (compatible with your login.php + profile.php)
     $sql = "CREATE TABLE IF NOT EXISTS users (
-        id            INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        username      VARCHAR(50) NOT NULL,
-        email         VARCHAR(150) NOT NULL,
-        password_hash VARCHAR(255) NOT NULL,
-        role          ENUM('buyer','seller','both','admin') NOT NULL DEFAULT 'buyer',
-        full_name     VARCHAR(150) DEFAULT NULL,
-        phone         VARCHAR(50) DEFAULT NULL,
-        address       TEXT DEFAULT NULL,
-        created_at    TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-        UNIQUE KEY uk_users_username (username),
-        UNIQUE KEY uk_users_email (email)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci";
-    if (!run_or_die($conn, $sql, "ensuring table users")) return false;
+    id              INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    username        VARCHAR(50) NOT NULL,
+    email           VARCHAR(150) NOT NULL,
+    password_hash   VARCHAR(255) NOT NULL,
+    role            ENUM('buyer','seller','both','admin') NOT NULL DEFAULT 'buyer',
+
+    profile_image   VARCHAR(255) DEFAULT NULL,
+    phone           VARCHAR(50) DEFAULT NULL,
+    address         TEXT DEFAULT NULL,
+
+    created_at      TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at      TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    UNIQUE KEY uk_users_username (username),
+    UNIQUE KEY uk_users_email (email)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci";
+
 
     // CATEGORIES (optional, for grouping items)
     $sql = "CREATE TABLE IF NOT EXISTS categories (
